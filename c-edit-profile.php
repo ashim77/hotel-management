@@ -88,7 +88,7 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn  btn-lg btn-primary" name="form_login">Register Now!</button>
+          <button type="submit" class="btn  btn-lg btn-primary" name="form1">Update</button>
         </form>
       </div>
     </section>
