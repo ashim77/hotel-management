@@ -23,7 +23,41 @@ if (isset($_POST['add_slider_form'])) {
 
     // Success Message
     if ($valid == 1) {
-        $success_message = 'Successfull';
+
+        // get the database table auto increment number
+        $q = $pdo->prepare("SHOW TABLE STATUS LIKE 'slider'");
+        $q->execute();
+        $result = $q->fetchALL();
+        foreach ($result as $row) {
+            $ai_id = $row[10];
+        }
+
+        // Select database table column
+        $slider_title = $_POST['slider_title'];
+        $slider_subtitle = $_POST['slider_subtitle'];
+        $slider_button_text = $_POST['slider_button_text'];
+        $slider_button_url = $_POST['slider_button_url'];
+
+        // Set image extenstion
+        if ($mime == 'image/jpeg') {
+            $ext = 'jpg';
+        } elseif ($mime == 'image/png') {
+            $ext = 'png';
+        } elseif ($mime == 'image/gif') {
+            $ext = 'gif';
+        }
+
+        // Uploaded photo name with extention
+        $final_name = 'slider_' . $ai_id . '.' . $ext;
+
+        // Upload the photo location
+        move_uploaded_file($path_tmp, '../uploads/' . $final_name);
+
+        // Insert data into my database
+        $q = $pdo->prepare("INSERT INTO slider(slider_title,slider_subtitle,slider_button_text,slider_button_url,slider_photo) VALUES(?,?,?,?,?)");
+        $q->execute([$slider_title, $slider_subtitle, $slider_button_text, $slider_button_url, $final_name]);
+
+        $success_message = 'Slider is added successfully';
     }
 }
 ?>
