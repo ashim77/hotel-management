@@ -38,7 +38,7 @@
                 <td><?php echo $row['slider_button_text']; ?></td>
                 <td><?php echo $row['slider_button_url']; ?></td>
                 <td>
-                  <a href="slider_edit.php" class="btn btn-xs btn-warning">Edit</a>
+                  <a href="slider_edit.php?id=<?php echo $row['slider_id']; ?>" class="btn btn-xs btn-warning">Edit</a>
                   <a href="slider_delete.php?id=<?php echo $row['slider_id']; ?>" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure?');">Delete</a>
                 </td>
               </tr>

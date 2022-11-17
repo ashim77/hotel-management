@@ -24,12 +24,13 @@ $q = $pdo->prepare("SELECT * FROM slider WHERE slider_id=?");
 $q->execute([$_REQUEST['id']]);
 $result = $q->fetchALL();
 
-echo '<pre>';
-var_dump($result);
-echo '</pre>';
-
 foreach ($result as $row) {
   $slider_photo = $row['slider_photo'];
 }
 
 unlink('../uploads/' . $slider_photo);
+
+$q = $pdo->prepare("DELETE FROM slider WHERE slider_id=?");
+$q->execute([$_REQUEST['id']]);
+
+header('location: slider_view.php');
