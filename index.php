@@ -1,45 +1,42 @@
 <?php require_once('header.php'); ?>
+
+
 <!-- Revolution Slider -->
 <section class="revolution-slider">
   <div class="bannercontainer">
     <div class="banner">
       <ul>
-        <!-- Slide 1 -->
-        <li data-transition="fade" data-slotamount="7" data-masterspeed="1500">
-          <!-- Main Image -->
-          <img src="images/slides/slide-bg.jpg" style="opacity:0;" alt="slidebg1" data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat">
-          <!-- Layers -->
-          <!-- Layer 1 -->
-          <div class="caption sft revolution-starhotel bigtext" data-x="505" data-y="30" data-speed="700" data-start="1700" data-easing="easeOutBack">
-            <span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span> A Five Star Hotel <span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span>
-          </div>
-          <!-- Layer 2 -->
-          <div class="caption sft revolution-starhotel smalltext" data-x="605" data-y="105" data-speed="800" data-start="1700" data-easing="easeOutBack">
-            <span>And we like to keep it that way!</span>
-          </div>
-          <!-- Layer 3 -->
-          <div class="caption sft" data-x="775" data-y="175" data-speed="1000" data-start="1900" data-easing="easeOutBack">
-            <a href="room-list.php" class="button btn btn-purple btn-lg">See rooms</a>
-          </div>
-        </li>
-        <!-- Slide 2 -->
-        <li data-transition="boxfade" data-slotamount="7" data-masterspeed="1000">
-          <!-- Main Image -->
-          <img src="images/slides/slide-bg-02.jpg" alt="darkblurbg" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-          <!-- Layers -->
-          <!-- Layer 1 -->
-          <div class="caption sft revolution-starhotel bigtext" data-x="585" data-y="30" data-speed="700" data-start="1700" data-easing="easeOutBack">
-            <span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span> Double room <span><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span>
-          </div>
-          <!-- Layer 2 -->
-          <div class="caption sft revolution-starhotel smalltext" data-x="682" data-y="105" data-speed="800" data-start="1700" data-easing="easeOutBack">
-            <span>€ 99,- a night this summer</span>
-          </div>
-          <!-- Layer 3 -->
-          <div class="caption sft" data-x="785" data-y="175" data-speed="1000" data-start="1900" data-easing="easeOutBack">
-            <a href="room-detail.php" class="button btn btn-purple btn-lg">Book this room</a>
-          </div>
-        </li>
+
+        <?php
+        $q = $pdo->prepare("SELECT * FROM slider ORDER BY slider_id ASC");
+        $q->execute();
+        $result = $q->fetchAll();
+        // echo '<pre>';
+        // var_dump($result);
+        // echo '</pre>';
+        foreach ($result as $row) { ?>
+          <li data-transition="fade" data-slotamount="7" data-masterspeed="1500">
+            <!-- Main Image -->
+            <img src="uploads/<?php echo $row['slider_photo']; ?>" style="opacity:0;" alt="slidebg1" data-bgfit="cover" data-bgposition="left bottom" data-bgrepeat="no-repeat">
+            <!-- Layers -->
+            <!-- Layer 1 -->
+            <div class="caption sft revolution-starhotel bigtext" data-x="505" data-y="30" data-speed="700" data-start="1700" data-easing="easeOutBack">
+              <?php echo $row['slider_title']; ?>
+            </div>
+            <!-- Layer 2 -->
+            <div class="caption sft revolution-starhotel smalltext" data-x="505" data-y="105" data-speed="800" data-start="1700" data-easing="easeOutBack">
+              <span><?php echo $row['slider_subtitle']; ?></span>
+            </div>
+
+            <!-- Layer 3 -->
+            <?php if (!empty($row['slider_button_text'])) : ?>
+              <div class="caption sft" data-x="505" data-y="175" data-speed="1000" data-start="1900" data-easing="easeOutBack">
+                <a href="<?php echo $row['slider_button_url']; ?>" class="button btn btn-purple btn-lg"><?php echo $row['slider_button_text']; ?></a>
+              </div>
+            <?php endif; ?>
+          </li>
+        <?php } ?>
+
       </ul>
     </div>
   </div>
@@ -241,40 +238,27 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h2 class="lined-heading"><span>USP section</span></h2>
+        <h2 class="lined-heading"><span>Our Features</span></h2>
       </div>
-      <div class="col-sm-3 bounceIn appear" data-start="0">
-        <div class="box-icon">
-          <div class="circle"><i class="fa fa-glass fa-lg"></i></div>
-          <h3>Beverages included</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. </p>
-          <a href="#">Read more<i class="fa fa-angle-right"></i></a>
+
+      <?php
+      $i = 0;
+      $q = $pdo->prepare("SELECT * FROM feature ORDER BY feature_id ASC");
+      $q->execute();
+      $result = $q->fetchALL();
+      foreach ($result as $row) {
+        $i += 400;
+      ?>
+        <div class="col-sm-3 bounceIn appear" data-start="<?php echo $i; ?>">
+          <div class="box-icon">
+            <div class="circle"><i class="<?php echo $row['feature_icon']; ?>"></i></div>
+            <h3><?php echo $row['feature_title']; ?></h3>
+            <p><?php echo $row['feature_text']; ?></p>
+          </div>
         </div>
-      </div>
-      <div class="col-sm-3 bounceIn appear" data-start="400">
-        <div class="box-icon">
-          <div class="circle"><i class="fa fa-credit-card fa-lg"></i></div>
-          <h3>Stay First, Pay After!</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. </p>
-          <a href="#">Read more<i class="fa fa-angle-right"></i></a>
-        </div>
-      </div>
-      <div class="col-sm-3 bounceIn appear" data-start="800">
-        <div class="box-icon">
-          <div class="circle"><i class="fa fa-cutlery fa-lg"></i></div>
-          <h3>24 Hour Restaurant</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. </p>
-          <a href="#">Read more<i class="fa fa-angle-right"></i></a>
-        </div>
-      </div>
-      <div class="col-sm-3 bounceIn appear" data-start="1200">
-        <div class="box-icon">
-          <div class="circle"><i class="fa fa-tint fa-lg"></i></div>
-          <h3>Spa Included!</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum eleifend augue, quis rhoncus purus fermentum. </p>
-          <a href="#">Read more<i class="fa fa-angle-right"></i></a>
-        </div>
-      </div>
+      <?php
+      }
+      ?>
     </div>
   </div>
 </section>

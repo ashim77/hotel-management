@@ -117,6 +117,13 @@ require_once('db.php');
 								<li><a href="slider_view.php">View Slider</a></li>
 							</ul>
 						</li>
+						<li>
+							<a href="#"><i class="fa fa-files-o fa-fw"></i> Features<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="feature_add.php">Add Feature</a></li>
+								<li><a href="feature_view.php">View Features</a></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->
