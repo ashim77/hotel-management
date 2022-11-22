@@ -124,6 +124,13 @@ require_once('db.php');
 								<li><a href="feature_view.php">View Features</a></li>
 							</ul>
 						</li>
+						<li>
+							<a href="#"><i class="fa fa-files-o fa-fw"></i> Testimonail<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="testimonial_add.php">Add Testimonail</a></li>
+								<li><a href="testimonial_view.php">View Testimonails</a></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->
