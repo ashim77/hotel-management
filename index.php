@@ -25,7 +25,7 @@
             </div>
             <!-- Layer 2 -->
             <div class="caption sft revolution-starhotel smalltext" data-x="505" data-y="105" data-speed="800" data-start="1700" data-easing="easeOutBack">
-              <span><?php echo $row['slider_subtitle']; ?></span>
+              <span><?php echo nl2br($row['slider_subtitle']); ?></span>
             </div>
 
             <!-- Layer 3 -->
@@ -253,7 +253,7 @@
           <div class="box-icon">
             <div class="circle"><i class="<?php echo $row['feature_icon']; ?>"></i></div>
             <h3><?php echo $row['feature_title']; ?></h3>
-            <p><?php echo $row['feature_text']; ?></p>
+            <p><?php echo nl2br($row['feature_text']); ?></p>
           </div>
         </div>
       <?php

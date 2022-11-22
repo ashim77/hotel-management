@@ -33,10 +33,10 @@ if (isset($_POST['add_slider_form'])) {
         }
 
         // Select database table column
-        $slider_title = $_POST['slider_title'];
-        $slider_subtitle = $_POST['slider_subtitle'];
-        $slider_button_text = $_POST['slider_button_text'];
-        $slider_button_url = $_POST['slider_button_url'];
+        $slider_title = strip_tags($_POST['slider_title']);
+        $slider_subtitle = strip_tags($_POST['slider_subtitle']);
+        $slider_button_text = strip_tags($_POST['slider_button_text']);
+        $slider_button_url = strip_tags($_POST['slider_button_url']);
 
         // Set image extenstion
         if ($mime == 'image/jpeg') {

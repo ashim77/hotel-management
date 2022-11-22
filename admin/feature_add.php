@@ -13,9 +13,13 @@ if (isset($_POST['add_feature_form'])) {
             throw new Exception("Feature Icon can not be empty!");
         }
 
+        $feature_title = strip_tags($_POST['feature_title']);
+        $feature_text = strip_tags($_POST['feature_text']);
+        $feature_icon = strip_tags($_POST['feature_icon']);
+
         // Insert data into my database
         $q = $pdo->prepare("INSERT INTO feature(feature_title,feature_text,feature_icon) VALUES(?,?,?)");
-        $q->execute([$_POST['feature_title'], $_POST['feature_text'], $_POST['feature_icon']]);
+        $q->execute([$feature_title, $feature_text, $feature_icon]);
 
         $_SESSION['tmp_success'] = 'Feature is added successfully';
         header('location: feature_add.php');
