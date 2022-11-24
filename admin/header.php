@@ -3,6 +3,7 @@ ob_start();
 session_start();
 // Database connection
 require_once('db.php');
+require_once('functions.php');
 ?>
 
 <!DOCTYPE html>

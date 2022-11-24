@@ -160,7 +160,7 @@ foreach ($result as $row) {
               </div>
               <!-- Slider Button URL -->
               <div class="form-group">
-                <label for="slider_button_url" class="col-sm-2 control-label">Change the Slider Photo</label>
+                <label for="slider_photo" class="col-sm-2 control-label">Change the Slider Photo</label>
                 <div class="col-sm-10">
                   <input type="file" name="slider_photo" id="slider_photo">
                 </div>

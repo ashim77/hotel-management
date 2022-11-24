@@ -48,7 +48,10 @@ if (isset($_POST['add_testimonial_form'])) {
         $final_name = 'testimonial_' . $ai_id . '.' . $ext;
 
         // Upload the photo location
-        move_uploaded_file($path_tmp, '../uploads/testimonial/' . $final_name);
+        // move_uploaded_file($path_tmp, '../uploads/testimonial/' . $final_name);
+        $source_image = $path_tmp;
+        $destination = '../uploads/testimonial/' . $final_name;
+        image_handler($path_tmp, $destination, 100, 100, 100);
 
         // Insert data into my database
         $q = $pdo->prepare("INSERT INTO testimonial(person_name_des,person_comment,person_photo) VALUES(?,?,?)");
@@ -94,14 +97,14 @@ if (isset($_POST['add_testimonial_form'])) {
                         <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                             <!-- Person Name -->
                             <div class="form-group">
-                                <label for="person_name_des" class="col-sm-2 control-label">Person Name & Des.</label>
+                                <label for="person_name_des" class="col-sm-2 control-label">Name & Des *</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="person_name_des" name="person_name_des">
                                 </div>
                             </div>
                             <!-- Person Comment text -->
                             <div class="form-group">
-                                <label for="person_comment" class="col-sm-2 control-label">Person Comments Text</label>
+                                <label for="person_comment" class="col-sm-2 control-label">Comments *</label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control" name="person_comment" id="person_comment" cols="30" rows="10"></textarea>
                                 </div>
@@ -109,7 +112,7 @@ if (isset($_POST['add_testimonial_form'])) {
 
                             <!-- Person Photo -->
                             <div class="form-group">
-                                <label for="person_photo" class="col-sm-2 control-label">Person Photo *</label>
+                                <label for="person_photo" class="col-sm-2 control-label">Photo *</label>
                                 <div class="col-sm-10" style="padding-top: 5px;">
                                     <input type="file" name="person_photo" id="person_photo">
                                 </div>

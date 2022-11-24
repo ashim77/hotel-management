@@ -8,7 +8,7 @@ if (!isset($_REQUEST['id'])) {
     header('location: index.php');
     exit;
   } else {
-    $q = $pdo->prepare("SELECT * FROM feature WHERE feature_id=?");
+    $q = $pdo->prepare("SELECT * FROM testimonial WHERE testimonial_id=?");
     $q->execute([$_REQUEST['id']]);
     $total = $q->rowCount();
 
@@ -19,9 +19,18 @@ if (!isset($_REQUEST['id'])) {
   }
 }
 
-$q = $pdo->prepare("DELETE FROM feature WHERE feature_id=?");
+//find the selected photo
+$q = $pdo->prepare("SELECT * FROM testimonial WHERE testimonial_id=?");
+$q->execute([$_REQUEST['id']]);
+$result = $q->fetchALL();
+
+foreach ($result as $row) {
+  $testimonial_photo = $row['person_photo'];
+}
+
+unlink('../uploads/testimonial/' . $testimonial_photo);
+
+$q = $pdo->prepare("DELETE FROM testimonial WHERE testimonial_id=?");
 $q->execute([$_REQUEST['id']]);
 
-$_SESSION['d_msg'] = 'Feature item is delete successfully!';
-
-header('location: feature_view.php');
+header('location: testimonial_view.php');
