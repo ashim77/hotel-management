@@ -132,6 +132,13 @@ require_once('functions.php');
 								<li><a href="testimonial_view.php">View Testimonails</a></li>
 							</ul>
 						</li>
+						<li>
+							<a href="#"><i class="fa fa-files-o fa-fw"></i> Service<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="service_add.php">Add Service</a></li>
+								<li><a href="service_view.php">View Services</a></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->
