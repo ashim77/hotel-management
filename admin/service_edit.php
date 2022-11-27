@@ -74,6 +74,9 @@ foreach ($result as $row) {
             <label for="service_text" class="col-sm-2 control-label">Service Text</label>
             <div class="col-sm-10">
               <textarea class="form-control" name="service_text" id="service_text" cols="30" rows="10"><?php echo $service_text; ?></textarea>
+              <script>
+                CKEDITOR.replace('service_text');
+              </script>
             </div>
           </div>
 

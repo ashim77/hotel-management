@@ -4,6 +4,12 @@ session_start();
 // Database connection
 require_once('db.php');
 require_once('functions.php');
+
+if (!isset($_SESSION['user'])) {
+	header('location: login.php');
+	exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +42,7 @@ require_once('functions.php');
 
 	<!-- Custom Fonts -->
 	<link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
 
 </head>
 

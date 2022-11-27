@@ -68,6 +68,9 @@ if (isset($_POST['add_service_form'])) {
                                 <label for="service_text" class="col-sm-2 control-label">Service Text</label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control" name="service_text" id="service_text" cols="30" rows="10"></textarea>
+                                    <script>
+                                        CKEDITOR.replace('service_text');
+                                    </script>
                                 </div>
                             </div>
 
