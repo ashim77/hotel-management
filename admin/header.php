@@ -147,7 +147,7 @@ if (!isset($_SESSION['user'])) {
 							</ul>
 						</li>
 						<li>
-							<a href="#"><i class="fa fa-files-o fa-fw"></i> Role<span class="fa arrow"></span></a>
+							<a href="#"><i class="fa fa-files-o fa-fw"></i> Role Settins<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a href="role_add.php">Add Role</a></li>
 								<li><a href="role_view.php">View Roles</a></li>
