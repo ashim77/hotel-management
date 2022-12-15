@@ -19,7 +19,16 @@ if (!isset($_REQUEST['id'])) {
   }
 }
 
+// Delete from role table
 $q = $pdo->prepare("DELETE FROM role WHERE role_id=?");
+$q->execute([$_REQUEST['id']]);
+
+// Delete from role access table
+$q = $pdo->prepare("DELETE FROM role_access WHERE role_id=?");
+$q->execute([$_REQUEST['id']]);
+
+// Delete from user table
+$q = $pdo->prepare("DELETE FROM user WHERE role_id=?");
 $q->execute([$_REQUEST['id']]);
 
 $_SESSION['d_msg'] = 'Role item is delete successfully!';

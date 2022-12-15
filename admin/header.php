@@ -86,38 +86,6 @@ if (!isset($_SESSION['user'])) {
 					<ul class="nav" id="side-menu">
 
 						<li><a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
-
-						<!--					<li><a href="table.php"><i class="fa fa-table fa-fw"></i> Tables</a></li>-->
-						<!--					<li><a href="form.php"><i class="fa fa-edit fa-fw"></i> Forms</a></li>-->
-						<!--					<li><a href="tab.php"><i class="fa fa-edit fa-fw"></i> Tab</a></li>-->
-						<!--					<li>-->
-						<!--						<a href=-->
-						<!--						   <a href="#">Second Level Item</a>-->
-						<!--						"#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>-->
-						<!--						<ul class="nav nav-second-level">-->
-						<!--							<li></li>-->
-						<!--							<li>-->
-						<!--								<a href="#">Second Level Item</a>-->
-						<!--							</li>-->
-						<!--							<li>-->
-						<!--								<a href="#">Third Level <span class="fa arrow"></span></a>-->
-						<!--								<ul class="nav nav-third-level">-->
-						<!--									<li>-->
-						<!--										<a href="#">Third Level Item</a>-->
-						<!--									</li>-->
-						<!--									<li>-->
-						<!--										<a href="#">Third Level Item</a>-->
-						<!--									</li>-->
-						<!--									<li>-->
-						<!--										<a href="#">Third Level Item</a>-->
-						<!--									</li>-->
-						<!--									<li>-->
-						<!--										<a href="#">Third Level Item</a>-->
-						<!--									</li>-->
-						<!--								</ul>-->
-						<!--							</li>-->
-						<!--						</ul>-->
-						<!--					</li>-->
 						<li>
 							<a href="#"><i class="fa fa-files-o fa-fw"></i> Slider<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
@@ -147,10 +115,17 @@ if (!isset($_SESSION['user'])) {
 							</ul>
 						</li>
 						<li>
-							<a href="#"><i class="fa fa-files-o fa-fw"></i> Role Settins<span class="fa arrow"></span></a>
+							<a href="#"><i class="fa fa-files-o fa-fw"></i> Role Settings<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a href="role_add.php">Add Role</a></li>
 								<li><a href="role_view.php">View Roles</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-files-o fa-fw"></i> User Settings<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="user_add.php">Add User</a></li>
+								<li><a href="user_view.php">View Users</a></li>
 							</ul>
 						</li>
 					</ul>

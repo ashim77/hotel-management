@@ -1,19 +1,13 @@
 <?php require_once('header.php'); ?>
-
-
 <!-- Revolution Slider -->
 <section class="revolution-slider">
   <div class="bannercontainer">
     <div class="banner">
       <ul>
-
         <?php
         $q = $pdo->prepare("SELECT * FROM slider ORDER BY slider_id ASC");
         $q->execute();
         $result = $q->fetchAll();
-        // echo '<pre>';
-        // var_dump($result);
-        // echo '</pre>';
         foreach ($result as $row) { ?>
           <li data-transition="fade" data-slotamount="7" data-masterspeed="1500">
             <!-- Main Image -->
@@ -335,9 +329,6 @@
               }
             }
             ?>
-
-
-
           </div>
         </div>
     </section>
