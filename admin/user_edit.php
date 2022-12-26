@@ -2,46 +2,46 @@
 
 <?php
 // Slider information
-if (isset($_POST['update_feature_form'])) {
+if (isset($_POST['edit_user_from'])) {
   try {
-    if (empty($_POST['feature_title'])) {
-      throw new Exception("Feature title can not be empty!");
+    if (empty($_POST['user_full_name'])) {
+      throw new Exception("Name can not be empty!");
     }
-    if (empty($_POST['feature_text'])) {
-      throw new Exception('Feature text can not be empty!');
+    if (empty($_POST['user_email'])) {
+      throw new Exception('Email Address can not be empty!');
     }
-    if (empty($_POST['feature_icon'])) {
-      throw new Exception('Feature icon can not be empty!');
+    if (empty($_POST['role_id'])) {
+      throw new Exception('Role can not be empty!');
     }
 
-    $q = $pdo->prepare("UPDATE feature SET 
-    feature_title=?,
-    feature_text=?,
-    feature_icon=?
-    WHERE feature_id=?");
+    $q = $pdo->prepare("UPDATE user SET 
+    user_full_name=?,
+    user_email=?,
+    role_id=?
+    WHERE user_id=?");
     $q->execute([
-      $_POST['feature_title'],
-      $_POST['feature_text'],
-      $_POST['feature_icon'],
+      $_POST['user_full_name'],
+      $_POST['user_email'],
+      $_POST['role_id'],
       $_REQUEST['id']
     ]);
 
-    $success_message = 'Feature information is update successfully';
+    $success_message = 'User information is update successfully';
   } catch (Exception $e) {
     $error_message = $e->getMessage();
   }
 }
 
 // exeisting slider info
-$q = $pdo->prepare("SELECT * FROM feature WHERE feature_id=?");
+$q = $pdo->prepare("SELECT * FROM user WHERE user_id=?");
 $q->execute([$_REQUEST['id']]);
 $result = $q->fetchALL();
 foreach ($result as $row) {
-  $feature_title = $row['feature_title'];
-  $feature_text = $row['feature_text'];
-  $feature_icon = $row['feature_icon'];
+  $user_full_name = $row['user_full_name'];
+  $user_email = $row['user_email'];
+  $user_password = $row['user_password'];
+  $role_id = $row['role_id'];
 }
-
 ?>
 
 <div class="row">
@@ -56,6 +56,7 @@ foreach ($result as $row) {
       <div class="panel-heading">
         Feature Form Elements
       </div>
+
       <div class="panel-body">
         <?php
         if (isset($error_message)) {
@@ -66,35 +67,92 @@ foreach ($result as $row) {
         }
         ?>
 
-        <form class="form-horizontal" action="" method="post">
-          <!-- Feature Title -->
-          <div class="form-group">
-            <label for="feature_title" class="col-sm-2 control-label">Feature Title</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="feature_title" name="feature_title" value="<?php echo $feature_title; ?>">
-            </div>
-          </div>
-          <!-- Feature Text -->
-          <div class="form-group">
-            <label for="feature_text" class="col-sm-2 control-label">Feature Text</label>
-            <div class="col-sm-10">
-              <textarea class="form-control" name="feature_text" id="feature_text" cols="30" rows="10"><?php echo $feature_text; ?></textarea>
-            </div>
-          </div>
-          <!-- Feature Icon -->
-          <div class="form-group">
-            <label for="feature_icon" class="col-sm-2 control-label">Feature Icon</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="feature_icon" name="feature_icon" value="<?php echo $feature_icon; ?>">
-            </div>
-          </div>
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#changedata" data-toggle="tab">Change Data</a>
+          </li>
+          <li><a href="#changepassword" data-toggle="tab">Change Password</a>
+          </li>
+        </ul>
 
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-primary" name="update_feature_form">Update</button>
-            </div>
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="changedata">
+
+            <form class="form-horizontal" action="" method="post">
+
+              <!-- User Full Name -->
+              <div class="form-group">
+                <label for="user_full_name" class="col-sm-2 control-label">Full Name *</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="user_full_name" name="user_full_name" value="<?php echo $user_full_name ?>">
+                </div>
+              </div>
+
+              <!-- User Email Address -->
+              <div class="form-group">
+                <label for="user_email" class="col-sm-2 control-label">Email Address *</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="user_email" name="user_email" value="<?php echo $user_email ?>">
+                </div>
+              </div>
+
+              <!-- Select Role -->
+              <div class="form-group">
+                <label for="role_id" class="col-sm-2 control-label">Select Role *</label>
+                <div class="col-sm-10">
+                  <select name="role_id" id="role_id" class="form-control">
+                    <?php
+                    $q = $pdo->prepare("SELECT * FROM role WHERE role_id != ? AND role_id != ? ORDER BY role_id ASC");
+                    $q->execute([1, 2]);
+                    $res = $q->fetchAll();
+                    foreach ($res as $row) {
+                    ?>
+                      <option value="<?php echo $row['role_id']; ?>" <?php if ($row['role_id'] == $role_id) {
+                                                                        echo 'selected';
+                                                                      } ?>>
+                        <?php echo $row['role_name']; ?>
+                      </option>
+                    <?php
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-primary" name="edit_user_from">Submit</button>
+                </div>
+              </div>
+            </form>
           </div>
-        </form>
+          <div class="tab-pane fade" id="changepassword">
+            <form class="form-horizontal" action="" method="post">
+
+              <!-- New Password -->
+              <div class="form-group">
+                <label for="new_password" class="col-sm-2 control-label">New Password *</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="new_password" name="new_password">
+                </div>
+              </div>
+
+              <!-- Retype Password -->
+              <div class="form-group">
+                <label for="retype_password" class="col-sm-2 control-label">Re-type Password *</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="retype_password" name="retype_password">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-primary" name="edit_user_password">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
 
       </div>
       <!-- /.panel-body -->

@@ -47,9 +47,9 @@
                 <td><?php echo $row['user_email']; ?></td>
                 <td><?php echo $row['role_name']; ?></td>
                 <td>
-                  <a href="user_edit.php?id=<?php echo $row['role_id']; ?>" class="btn btn-xs btn-warning">Edit</a>
-                  <?php if ($row['role_id'] != 1 && $row['role_id'] != 2) : ?>
-                    <a href="user_delete.php?id=<?php echo $row['role_id']; ?>" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure?');">Delete</a>
+                  <a href="user_edit.php?id=<?php echo $row['user_id']; ?>" class="btn btn-xs btn-warning">Edit</a>
+                  <?php if ($row['user_id'] != 1 && $row['user_id'] != 2) : ?>
+                    <a href="user_delete.php?id=<?php echo $row['user_id']; ?>" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure?');">Delete</a>
                   <?php endif; ?>
                 </td>
               </tr>
